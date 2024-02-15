@@ -4,7 +4,6 @@ pipeline {
     environment {
         DOCKER_IMAGE_NAME = 'calculator'
         GITHUB_REPO_URL = 'https://github.com/shashankmittra/calculator.git'
-        ANSIBLE_HOME = '/opt/homebrew' 
     }
 
     stages {
@@ -49,14 +48,9 @@ pipeline {
         stage('Run Ansible Playbook') {
             steps {
                 script {
-                    // Set the PATH to include the Ansible directory
-                    sh 'export PATH=${ANSIBLE_HOME}/bin:${PATH}'
-
-                    // Run Ansible playbook with full path
                     sh "ansible-playbook /Users/shashankmittra/Desktop/IIITB/Sem-2/SP/miniproject/deploy.yml -i /Users/shashankmittra/Desktop/IIITB/Sem-2/SP/miniproject/inventory"
                 }
             }
         }
-
     }
 }
