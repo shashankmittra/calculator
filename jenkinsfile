@@ -37,7 +37,7 @@ pipeline {
         stage('Push Docker Images') {
             steps {
                 script {
-                    docker.withRegistry('', 'DockerHubCred') {
+                    docker.withRegistry('', 'dockerhub') {
                         sh 'docker tag ${DOCKER_IMAGE_NAME} shashankmittra/calculator:latest'
                         sh 'docker push shashankmittra/calculator:latest' // Corrected the username
                     }
