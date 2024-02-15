@@ -1,0 +1,60 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE_NAME = 'calculator'
+        GITHUB_REPO_URL = 'https://github.com/adityavit36/calculator.git'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // Checkout the code from the GitHub repository
+                    git branch: 'master', url: "${GITHUB_REPO_URL}"
+                }
+            }
+        }
+
+        stage('Remove Docker Image') {
+            steps {
+                script {
+                    // Remove the Docker image if it exists
+                    sh 'docker rmi -f ${DOCKER_IMAGE_NAME} || true'
+                }
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build Docker image
+                    docker.build("${DOCKER_IMAGE_NAME}", '.')
+                }
+            }
+        }
+
+        stage('Push Docker Images') {
+            steps {
+                script {
+                    docker.withRegistry('', 'DockerHubCred') {
+                        sh 'docker tag ${DOCKER_IMAGE_NAME} shashankmittra/calculator:latest'
+                        sh 'docker push shashankmittra/calculator:latest' // Corrected the username
+                    }
+                }
+            }
+        }
+
+        stage('Run Ansible Playbook') {
+            steps {
+                script {
+                    ansiblePlaybook(
+                        playbook: 'deploy.yml',
+                        inventory: 'inventory'
+                     )
+                }
+            }
+        }
+
+    }
+}
