@@ -45,6 +45,18 @@ pipeline {
             }
         }
 
+        stage('Debugging') {
+            steps {
+                script {
+                    sh 'echo "Current user: $(whoami)"'
+                    sh 'ls -l /Users/shashankmittra/Desktop/IIITB/Sem-2/SP/miniproject'
+                    sh 'ls -l /Users/shashankmittra/Desktop/IIITB/Sem-2/SP/miniproject/inventory'
+                    sh 'ls -l /Users/shashankmittra/Desktop/IIITB/Sem-2/SP/miniproject/deploy.yml'
+                }
+            }
+        }
+
+
         stage('Run Ansible Playbook') {
             steps {
                 script {
