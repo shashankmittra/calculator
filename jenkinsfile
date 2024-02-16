@@ -49,10 +49,12 @@ pipeline {
         stage('Run Ansible Playbook') {
             steps {
                 script {
-                   ansiblePlaybook(
-                        playbook: 'deploy.yml',
-                        inventory: 'inventory'
-                     )
+                  script {
+                        sh '/opt/homebrew/bin/ansible-playbook --version'
+
+                        // Run Ansible playbook with full path
+                        sh '/opt/homebrew/bin/ansible-playbook /var/root/.jenkins/workspace/new/deploy.yml -i /var/root/.jenkins/workspace/new/inventory'
+                    }
                 }
             }
         }
