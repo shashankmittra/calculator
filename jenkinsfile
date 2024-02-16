@@ -48,10 +48,10 @@ pipeline {
         stage('Run Ansible Playbook') {
             steps {
                 script {
-                    ansiblePlaybook(
-                        playbook: 'deploy.yml',
-                        inventory: 'inventory'
-                     )
+                    sh '/opt/homebrew/bin/ansible-playbook --version'
+
+                    // Run Ansible playbook with full path
+                    sh "/opt/homebrew/bin/ansible-playbook /Users/shashankmittra/Desktop/IIITB/Sem-2/SP/miniproject/deploy.yml -i /Users/shashankmittra/Desktop/IIITB/Sem-2/SP/miniproject/inventory"
                 }
             }
         }
