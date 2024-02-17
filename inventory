@@ -1,3 +1,2 @@
-localhost ansible_user=shashankmittra ansible_ssh_pass=9461027404
+localhost ansible_python_interpreter=/Library/Frameworks/Python.framework/Versions/3.10/bin/python3 ansible_user=shashankmittra ansible_ssh_pass=9461027404
 ansible_ssh_common_args = '-o StrictHostKeyChecking=no'
-ansible_python_interpreter=/Library/Frameworks/Python.framework/Versions/3.10/bin/python3
