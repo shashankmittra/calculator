@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE_NAME = 'calculator'
         GITHUB_REPO_URL = 'https://github.com/shashankmittra/calculator.git'
+        MAVEN_HOME = '/Users/shashankmittra/Downloads/apache-maven-3.9.6'
     }
 
     stages {
@@ -16,14 +17,22 @@ pipeline {
             }
         }
 
-        stage('Remove Docker Image') {
-            steps {
-                script {
-                    // Remove the Docker image if it exists
-                    sh 'docker rmi -f ${DOCKER_IMAGE_NAME} || true'
-                }
-            }
-        }
+        stage('Maven Build') {
+                            steps {
+                                script {
+                                    env.PATH = "${env.MAVEN_HOME}/bin:${env.PATH}"
+                                    sh 'mvn clean install'
+                                }
+                            }
+          }
+        stage('Run Tests') {
+                            steps {
+                                script
+                                {
+                                          sh 'mvn test'
+                                }
+                               }
+                         }
 
         stage('Build Docker Image') {
             steps {
