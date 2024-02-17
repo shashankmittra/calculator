@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE_NAME = 'calculator'
         GITHUB_REPO_URL = 'https://github.com/shashankmittra/calculator.git'
-        // MAVEN_HOME = '/Users/shashankmittra/Downloads/apache-maven-3.9.6'
+        MAVEN_HOME = '/Users/shashankmittra/Downloads/apache-maven-3.9.6'
     }
 
     stages {
@@ -20,8 +20,8 @@ pipeline {
         stage('Maven Build') {
                             steps {
                                 script {
-                                    // env.PATH = "${env.MAVEN_HOME}/bin:${env.PATH}"
-                                    sh '/Users/shashankmittra/Downloads/apache-maven-3.9.6/bin/mvn clean install'
+                                    env.PATH = "${env.MAVEN_HOME}/bin:${env.PATH}"
+                                    sh 'mvn clean install'
                                 }
                             }
           }
@@ -29,7 +29,7 @@ pipeline {
                             steps {
                                 script
                                 {
-                                          sh '/Users/shashankmittra/Downloads/apache-maven-3.9.6/bin/mvn test'
+                                          sh 'mvn test'
                                 }
                                }
                          }
