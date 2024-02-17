@@ -1,4 +1,7 @@
-FROM openjdk:17
+FROM adoptopenjdk:17-jdk-hotspot
+
+WORKDIR /app
+
 COPY ./target/calculator-1.0-SNAPSHOT.jar ./
-WORKDIR ./
-CMD ["java","-cp","calculator-1.0-SNAPSHOT.jar","org.example.Main"]
+
+CMD ["java", "-jar", "calculator-1.0-SNAPSHOT.jar"]
