@@ -21,7 +21,7 @@ pipeline {
                             steps {
                                 script {
                                     env.PATH = "${env.MAVEN_HOME}/bin:${env.PATH}"
-                                    sh 'mvn clean install'
+                                    sh '/Users/shashankmittra/Downloads/apache-maven-3.9.6/bin/mvn clean install'
                                 }
                             }
           }
@@ -29,7 +29,7 @@ pipeline {
                             steps {
                                 script
                                 {
-                                          sh 'mvn test'
+                                          sh '/Users/shashankmittra/Downloads/apache-maven-3.9.6/bin/mvn test'
                                 }
                                }
                          }
