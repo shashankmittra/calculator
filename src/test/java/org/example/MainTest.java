@@ -1,71 +1,35 @@
 package org.example;
 
-import org.junit.jupiter.api.*;
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-class MainTest {
+public class MainTest {
 
     @Test
-    void testSquareRootFunction() {
-        String input = "1\n16\n5\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-
-        Main.main(new String[]{});
-
-        // Check the output here
-        // Example: assertEquals(expectedOutput, actualOutput);
+    public void testSquareRoot() {
+        assertEquals(2.0, Main.squareRoot(4), 0.001);
+        assertEquals(3.0, Main.squareRoot(9), 0.001);
+        assertEquals(4.0, Main.squareRoot(16), 0.001);
     }
 
     @Test
-    void testFactorialFunction() {
-        String input = "2\n5\n5\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-
-        Main.main(new String[]{});
-
-        // Check the output here
-        // Example: assertEquals(expectedOutput, actualOutput);
+    public void testFactorial() {
+        assertEquals(1, Main.factorial(0));
+        assertEquals(1, Main.factorial(1));
+        assertEquals(120, Main.factorial(5));
     }
 
     @Test
-    void testNaturalLogarithm() {
-        String input = "3\n10\n5\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-
-        Main.main(new String[]{});
-
-        // Check the output here
-        // Example: assertEquals(expectedOutput, actualOutput);
+    public void testNaturalLogarithm() {
+        assertEquals(0.0, Main.naturalLogarithm(1), 0.001);
+        assertEquals(1.609, Main.naturalLogarithm(5), 0.001);
+        assertEquals(2.303, Main.naturalLogarithm(10), 0.001);
     }
 
     @Test
-    void testPowerFunction() {
-        String input = "4\n2\n3\n5\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-
-        Main.main(new String[]{});
-
-        // Check the output here
-        // Example: assertEquals(expectedOutput, actualOutput);
-    }
-
-    @Test
-    void testExitFunction() {
-        String input = "5\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        System.setIn(in);
-
-        Main.main(new String[]{});
-
-        // Check if the program exits gracefully
-        // Example: assertTrue(checkIfProgramExitedGracefully);
+    public void testPower() {
+        assertEquals(8.0, Main.power(2, 3), 0.001);
+        assertEquals(25.0, Main.power(5, 2), 0.001);
+        assertEquals(1.0, Main.power(10, 0), 0.001);
     }
 }

@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE_NAME = 'calculator'
+        DOCKER_IMAGE_NAME = 'shashankmittra/calculator:latest'
         GITHUB_REPO_URL = 'https://github.com/shashankmittra/calculator.git'
         MAVEN_HOME = '/opt/apache-maven-3.9.6'   
     }
@@ -40,21 +40,18 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    script{
-                        sh '/usr/local/bin/docker build -t calculator .'
-                    }
+                    docker.build("${DOCKER_IMAGE_NAME}", '.')
                 }
             }
         }
 
-        stage('Push Docker Images') {
+        stage('Push Docker Image') {
             steps {
                 script {
                     docker.withRegistry('', 'dockerhub') {
-                        sh '/usr/local/bin/docker tag ${DOCKER_IMAGE_NAME} shashankmittra/calculator:latest'
-                        sh '/usr/local/bin/docker push shashankmittra/calculator:latest'
+                        sh 'docker push shashankmittra/calculator:latest'
                     }
-                }
+                }s
             }
         }
 
