@@ -48,10 +48,8 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    env.PATH = "/usr/local/bin/docker"
-                    docker.withRegistry('', 'dockerhub') {
-                        sh '/usr/local/bin/docker push shashankmittra/calculator:latest'
-                    }
+                    sh '/usr/local/bin/docker login -u shashankmittra -p Sam@9461027404' 
+                    sh '/usr/local/bin/docker push shashankmittra/calculator:latest'
                 }
             }
         }
