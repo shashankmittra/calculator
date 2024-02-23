@@ -60,7 +60,7 @@ pipeline {
                     sh '/opt/homebrew/bin/ansible-playbook --version'
 
                     // Run Ansible playbook with full path
-                    sh '/opt/homebrew/bin/ansible-playbook /var/root/.jenkins/workspace/final/deploy.yml -i /var/root/.jenkins/workspace/final/inventory'
+                    sh '/opt/homebrew/bin/ansible-playbook /var/root/.jenkins/workspace/new/deploy.yml -i /var/root/.jenkins/workspace/new/inventory'
                 }
             }
         }
