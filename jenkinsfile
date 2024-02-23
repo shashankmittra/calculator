@@ -51,8 +51,8 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('', 'dockerhub') {
-                        sh 'docker tag ${DOCKER_IMAGE_NAME} shashankmittra/calculator:latest'
-                        sh 'docker push shashankmittra/calculator:latest'
+                        sh '/usr/local/bin/docker tag ${DOCKER_IMAGE_NAME} shashankmittra/calculator:latest'
+                        sh '/usr/local/bin/docker push shashankmittra/calculator:latest'
                     }
                 }
             }
