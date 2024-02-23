@@ -51,7 +51,7 @@ pipeline {
                     docker.withRegistry('', 'dockerhub') {
                         sh 'docker push shashankmittra/calculator:latest'
                     }
-                }s
+                }
             }
         }
 
