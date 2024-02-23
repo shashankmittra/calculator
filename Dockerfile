@@ -1,7 +1,7 @@
-FROM openjdk:17-jdk-slim
-
-WORKDIR /app
+FROM openjdk:21
 
 COPY ./target/calculator-1.0-SNAPSHOT.jar ./
 
-CMD ["java", "-jar", "calculator-1.0-SNAPSHOT.jar"]
+WORKDIR ./
+
+CMD ["java", "-cp", "calculator-1.0-SNAPSHOT.jar", "org.example.Main"]
