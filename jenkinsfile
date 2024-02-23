@@ -40,7 +40,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    docker.build("${DOCKER_IMAGE_NAME}", '.')
+                    sh '/usr/local/bin/docker build -t shashankmittra/calculator:latest .'
                 }
             }
         }
@@ -48,8 +48,9 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
+                    env.PATH = "/usr/local/bin/docker"
                     docker.withRegistry('', 'dockerhub') {
-                        sh 'docker push shashankmittra/calculator:latest'
+                        sh '/usr/local/bin/docker push shashankmittra/calculator:latest'
                     }
                 }
             }
