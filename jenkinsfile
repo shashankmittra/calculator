@@ -45,18 +45,29 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
+         stage('Push Docker Image') {
             steps {
-                script {
-                    sh '/usr/local/bin/docker login -u shashankmittra -p Sam@9461027404' 
+                script{
+                    docker.withRegistry('', 'DockerHubCred') {
                     sh '/usr/local/bin/docker push shashankmittra/calculator:latest'
-                }
+                    }
+                 }
             }
         }
+
+        // stage('Push Docker Image') {
+        //     steps {
+        //         script {
+        //             sh '/usr/local/bin/docker login -u shashankmittra -p Sam@9461027404' 
+        //             sh '/usr/local/bin/docker push shashankmittra/calculator:latest'
+        //         }
+        //     }
+        // }
 
         stage('Run Ansible Playbook') {
             steps {
                 script {
+                    env.PATH = "/path/to/sshpass:${env.PATH}"
                     sh '/opt/homebrew/bin/ansible-playbook --version'
 
                     // Run Ansible playbook with full path
